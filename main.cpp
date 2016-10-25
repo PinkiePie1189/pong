@@ -6,6 +6,7 @@
 #define DOWN 2
 #define LEFT 3
 #define RIGHT 4
+#define AI -1
 //#define DEBUG
 SDL_Texture* loadTexture(std::string path);
 bool Init();
@@ -35,6 +36,7 @@ SDL_Rect BORDERDOWN= {0,HEIGHT-20,WIDTH,200};
 int score1=0;
 int score2=0;
 int ballspdx=5,ballspdy=5;
+int spd=9;
 int main(int argc,char* argv[])
 {
     if(!Init())
@@ -45,7 +47,6 @@ int main(int argc,char* argv[])
     {
         bool quit=false;
         SDL_Event handler;
-        int spd=9;
         const Uint8* MagieNeagra;
         loadstuff();
         Mix_PlayMusic( gMusic, -1 );
@@ -98,6 +99,7 @@ int main(int argc,char* argv[])
                 MOV(RIGHT,player2,spd);
             }*/
             MOVBall(ballspdx,ballspdy);
+            MOV(AI,player2,spd);
             SDL_SetRenderDrawColor(renderer,0x00,0x00,0x00,0xFF);
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer,bg,NULL,NULL);
@@ -204,6 +206,16 @@ void MOV(int _dir,SDL_Rect& _position,const int _step)
         {
             _position.y-=_step;
         }
+        break;
+    case AI:
+            if(ball.y+ball.h-_step<=_position.y && ballspdy<0)
+            {
+                MOV(UP,_position,_step);
+            }
+            if(ball.y+_step>=_position.y+_position.h && ballspdy>0)
+            {
+                MOV(DOWN,_position,_step);
+            }
         break;
     }
 }
