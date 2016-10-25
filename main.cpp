@@ -82,14 +82,14 @@ int main(int argc,char* argv[])
             {
                 MOV(RIGHT,player1,spd);
             }*/
-            if(MagieNeagra[SDL_SCANCODE_W])
+            /*if(MagieNeagra[SDL_SCANCODE_W])
             {
                 MOV(UP,player2,spd);
             }
             if(MagieNeagra[SDL_SCANCODE_S])
             {
                 MOV(DOWN,player2,spd);
-            }
+            }*/
             /*if(MagieNeagra[SDL_SCANCODE_A])
             {
                 MOV(LEFT,player2,spd);
@@ -99,7 +99,7 @@ int main(int argc,char* argv[])
                 MOV(RIGHT,player2,spd);
             }*/
             MOVBall(ballspdx,ballspdy);
-            MOV(AI,player2,spd);
+            MOV(AI,player2,spd+8);
             SDL_SetRenderDrawColor(renderer,0x00,0x00,0x00,0xFF);
             SDL_RenderClear(renderer);
             SDL_RenderCopy(renderer,bg,NULL,NULL);
@@ -208,11 +208,11 @@ void MOV(int _dir,SDL_Rect& _position,const int _step)
         }
         break;
     case AI:
-            if(ball.y+ball.h-_step<=_position.y && ballspdy<0)
+            if(ball.y+ball.h-_step<=_position.y)
             {
                 MOV(UP,_position,_step);
             }
-            if(ball.y+_step>=_position.y+_position.h && ballspdy>0)
+            if(ball.y+_step>=_position.y+_position.h)
             {
                 MOV(DOWN,_position,_step);
             }
