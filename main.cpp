@@ -109,7 +109,10 @@ int main(int argc,char* argv[])
             SDL_Color culuareScor= {0xFF,0xFF,0xFF};
             SDL_Rect TabelaScor= {240, 40, 340, 80};
             nani<<score1<<" "<<score2;
-            SDL_RenderCopy(renderer,LoadText(nani.str(),culuareScor),NULL,&TabelaScor);
+            SDL_Texture*TexturaScor=LoadText(nani.str(),culuareScor);
+            SDL_RenderCopy(renderer,TexturaScor,NULL,&TabelaScor);
+            SDL_DestroyTexture(TexturaScor);
+            TexturaScor=NULL;
 
 #ifdef DEBUG
             SDL_RenderFillRect(renderer,&BORDERUP);
@@ -212,7 +215,7 @@ SDL_Texture* LoadText(std::string _text,SDL_Color colour)
     SDL_Surface*textsurface=TTF_RenderText_Solid(gFont,_text.c_str(),colour);
     if(textsurface==NULL)
     {
-        fprintf(stderr,"Unable to render text surface! TTF error:%s",TTF_GetError());
+        fprintf(stderr,"Unable to render text surface! TTF error:%s\n",TTF_GetError());
     }
     else
     {
