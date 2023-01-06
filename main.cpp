@@ -260,7 +260,7 @@ void free()
 void loadstuff()
 {
     bg=loadTexture("Assets/pics/masa.png");
-    gFont=TTF_OpenFont("Assets/fonts/consola.TTF",10);
+    gFont=TTF_OpenFont("Assets/fonts/consola.ttf",10);
     gMusic=Mix_LoadMUS("Assets/musics/Edison.mp3");
     gPlayerSOUND=Mix_LoadWAV("Assets/musics/effects/player.wav");
     gDeathSOUND=Mix_LoadWAV("Assets/musics/effects/death.wav");
